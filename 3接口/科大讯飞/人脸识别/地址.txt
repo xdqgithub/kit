@@ -1,0 +1,4 @@
+https://doc.xfyun.cn/rest_api/%E9%9D%99%E9%BB%98%E6%B4%BB%E4%BD%93%E6%A3%80%E6%B5%8B.html
+
+
+https://www.xfyun.cn/services/face?type=face

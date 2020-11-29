@@ -1,0 +1,52 @@
+//http_request()  函数 curl
+
+
+
+
+
+//利用分词接口获取数据
+    $url = "http://www.xunsearch.com/scws/api.php";
+    $data['data'] = '要分的词';
+    $data['respond'] = 'json';
+
+    $result = http_request($url,$data);
+
+    //将json 数据转换成数组
+    $json = json_decode($result,true);
+
+
+
+
+网址：http://www.xunsearch.com/scws/api.php；
+
+
+
+
+返回数据示例：
+
+Array
+(
+    [status] => ok
+    [words] => Array
+        (
+            [0] => Array
+                (
+                    [word] => 年
+                    [off] => 0
+                    [len] => 3
+                    [idf] => 0
+                    [attr] => q
+                )
+
+            [1] => Array
+                (
+                    [word] => 大是大非
+                    [off] => 3
+                    [len] => 12
+                    [idf] => 9.1300001144409
+                    [attr] => i
+                )
+
+        )
+
+)

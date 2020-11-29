@@ -1,0 +1,137 @@
+1) 切换到基础分支，如主干
+
+git checkout master
+
+2）创建并切换到新分支
+
+git checkout -b panda
+
+git branch可以看到已经在panda分支上
+
+3)更新分支代码并提交
+
+git add *
+
+git commit -m "init panda"
+
+git push origin panda
+
+4)在git代码管理界面经可以看到panda分支了，成功~~
+
+
+git的操作流程如下所示:
+   1. 安装git
+    sudo apt-get install git
+
+   2. 查看git的安装结果
+         git   #会有信息提示,表示安装成功, 没有提示表示没有安装
+
+   3. 创建项目
+    创建一个项目的文件夹(或者使用pycharm创建,在项目的根目录中)
+    
+   4.创建本地仓库
+    进入到项目的根目录中
+    执行: git init   #会产生一个.git的隐藏文件夹
+    提示: 初始化空的git 仓库于  项目路径的位置
+    
+   5.配置个人信息(也就是提交到git服务器之后的名字)
+    例如:
+    git config user.name 'zhangsan'
+    git config user.email '123@qq.com'
+    提示:
+        配置完了之后 .git/config 中会有名字和邮箱
+        如果不配置,默认使用全局配置里面的, 用户名, 邮箱
+        默认名称位于: home/.gitconfig
+        
+   6.查看文件状态
+    git status
+    红色: 表示新建文件, 或者新修改了文件,目前位于工作区中
+    绿色: 表示文件在暂存区
+    
+  7.将工作区文件添加到, 暂存区 (工作区 --> 暂存区)
+   git add .  #表示添加所有改变的文件
+   git add xxx.py #表示添加指定文件
+
+  8.将暂存区提交到仓库区(暂存区 --> 仓库区)
+  格式: git commit -m '注释'
+
+  9.工作区 -->仓库区 (直接将工作区的变动, 提交到仓库区)
+  格式: git commit -am '注释信息'
+
+ 10.查看历史版本
+  格式1: git log  #显示版本,用户, 日期,注释
+  格式2: git reflog #可以将所有的版本, 操作(添加,删除)都显示出来
+
+ 11.回退版本:
+格式1: git reset --hard HEAD^
+解释:
+    HEAD表示当前最新版本
+    HEAD^表示当前最新版本的,  上一个版本
+    HEAD^^表示当前最新版本的, 前两个版本, 依次类推
+    HEAD~1 表示当前最新版本的,  上一个版本
+    HEAD~2 表示当前最新版本的, 前两个版本, 依次类推
+    
+ 格式2: git reset --hard 版本号  
+ 注意: 版本号很长, 指定的大于等于7未即可
+
+
+ 12.撤销修改
+    撤销工作区:
+    格式: git checkout 文件名
+
+   撤销暂存区:
+    格式: git reset HEAD 文件名  #将暂存区的代码撤销到工作区
+        git checkout 文件名   #撤销工作区代码
+
+    注意: 
+     只能撤销工作区, 暂存区的代码, 不能撤销仓库区的代码
+     撤销仓库区的代码就相当于回退版本操作
+
+
+  13.对比版本
+    对比版本库与工作区代码差异:
+    格式: git diff HEAD -- xxx.py
+    格式解释: HEAD表示版本库,    xxx.py表示工作区
+    出现绿色加号(+) 表示工作区相对于版本库增加的代码
+
+   对比版本库:
+    格式: git diff HEAD  HEAD^ -- login.py
+    HEAD: 表示当前版本
+    HEAD^:表示上个版本
+    login: 表示对比的文件
+    
+    
+   14.删除文件:
+    格式1: rm 文件名  #直接删除磁盘文件,linux指令
+    格式1: git rm 文件名  #删除暂存区文件
+        
+    如果误删,撤销:
+    格式1: rm 文件名 #误删,未提交
+        git checkout -- 文件名 #撤销
+        
+    格式2: git rm 文件名 #误删
+恢复: git reset --hard HEAD^  #撤销
+
+
+多人操作:
+23.git clone 地址, 克隆远程的代码到本地
+24.git push, 推送到远程仓库
+25.git config --global  credential.helper cache 十五分钟有效期
+26.git config  credential.helper 'cache --timeout==3600' 一个小时有效期
+27.git config --global credential.helper store 长期有效
+28.git pull ,拉取远程代码到本地目录
+
+标签
+29.git tag -a 标签名 -m '标签描述v1.0'
+30.git push origin 标签名, 将本地标签版本推送到远程端
+31.git tag -d 标签名,  删除本地标签
+32.git push origin --delete 标签名, 删除远端的标签名
+
+
+分支
+33.git branch, 查看当前分支
+34.git checkout -b 分支名, 切换到指定分支
+35.git push -u origin 分支名,  推送本地分支跟踪远程分支
+36.git checkout master/dev 切换到master主分支/子分支
+37.git merge 分支A, 合并指定分支A到主分支中
+ 

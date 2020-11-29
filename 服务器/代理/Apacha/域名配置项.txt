@@ -1,0 +1,42 @@
+<VirtualHost *:80>
+    #项目目录
+    DocumentRoot "C:\Users\Administrator\Desktop\hx"
+
+    #项目域名
+    ServerName hx.top
+
+    #错误日志
+    ErrorLog "logs/hx-error_log"
+
+    #访问日志
+    CustomLog "logs/hx-access_log" common
+
+    #引用其他文件
+    alias /aaa "D:\hx"
+
+    #重定向404页面
+    ErrorDocument 404 /error2.html
+
+    #重定向403页面
+    ErrorDocument 403 /abc.html
+
+    <Directory "C:\Users\Administrator\Desktop\hx">
+        #在项目没有索引文件的时候是否展示项目目录(-Indexes:不显示;  +Indexes:显示)
+        Options -Indexes -FollowSymLinks +ExecCGI
+
+        #是否开启.htaccess权限   All/none
+        #AllowOverride All
+
+        #排序 允许,拒绝/拒绝,允许
+        Order allow,deny
+
+        #允许的范围 all所有人/单独的ip/多个ip用空格隔开
+        Allow from all
+
+        #拒绝的范围 同上
+        Deny from 60.37.1.254
+
+        #高版本apache需要下面的代码   防止403**  granted允许/denied拒绝
+        Require all granted
+    </Directory> 
+</VirtualHost>

@@ -1,0 +1,11 @@
+操作
+	systemctl start/restart/stop/status docker
+
+实例化容器
+	docker run -itd 镜像名 /bin/bash(运行方式)
+
+实例重启 
+	docker restart ID/Name
+
+进入实例
+	docker exec -it ID/NAME /bin/bash

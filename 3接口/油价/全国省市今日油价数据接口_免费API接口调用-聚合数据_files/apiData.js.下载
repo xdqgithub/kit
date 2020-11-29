@@ -1,0 +1,74 @@
+$(document).ready(function () {
+    /**
+     * 用户收藏接口
+     */
+    $('body').on('click','#favorite',function () {
+        var id = $(this).attr('did');
+        var didType = $(this).attr('didType')
+        $.ajax({
+            url:'/docs/favorite',
+            type:'post',
+            dataType:'json',
+            data:'did='+id+'&type='+didType,
+            success:function(obj){
+                if(obj.code == 0) {
+                    var count = parseInt($('#favorite-count').html())
+
+                    if(obj.result.sta == 1) {//关注
+                        count = count+1;
+                        $("#favorite").addClass("stored").html('已收藏');
+                    } else if(obj.result.sta == 2) {
+                        if(count-1 >0) {
+                            count = count-1
+                        }
+                        $("#favorite").removeClass("stored").html('收藏');
+                    }
+                    $('#favorite-count').html(count)
+                } else {
+                    window.location.href = "javascript:frameLogin()";
+                }
+            }
+        })
+    })
+
+    $('.select-type-name').click(function(){
+        var action = $(this).attr('action');
+        $.ajax({
+            url:action,
+            type:'get',
+            success:function(){
+                location.reload();
+            }
+        })
+    })
+    //列表页检索
+    $("#api-keyword").focus(function(){
+        document.onkeydown = function(e){
+            var ev = document.all ? window.event : e;
+            if(ev.keyCode==13) {
+                $("#api-search-button").click();
+            }
+        }
+    })
+
+    $("#api-search-button").click(function(){
+        var q =$("#api-keyword").val();
+        q= q.replace(/\//g,'');
+        q= q.replace(/^\.+/g,'');
+        if(q.length==0){
+            location.href = '/docs';
+            return false;
+        }
+        if(q=='') {
+            alert('请输入想要检索的API')
+            return false;
+        }
+        if(q == '聚合六周年'){
+            window.open('/activity/sixth?source=jhser');
+        }else{
+            var searchUrl = '/docs/s/q/%40q%40'
+            searchUrl=searchUrl.replace(/%40q%40/,encodeURIComponent(q));
+            window.location.href=searchUrl;
+        }
+    });
+});

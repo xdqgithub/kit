@@ -1,0 +1,35 @@
+
+
+public function backMsg(){
+        header("content-type:text/html;charset=utf-8");
+        $postStr = $GLOBALS['HTTP_RAW_POST_DATA'];//接收微信字符串的写法
+        logs($postStr);//记录日志
+        $postObj = simplexml_load_string($postStr);//将xml数据转换为对象
+        $type=$postObj->MsgType;//获取数据类型，以做判断。
+	//判断为文本消息 或 语音消息
+        if($type == ('text'||"voice")) {
+		//语音消息会带有标点符号所以需要处理数据
+            $word = $postObj->Content?$postObj->Content:mb_substr($postObj->Recognition,0,mb_strlen($postObj->Recognition,'utf8')-1,'utf8');
+            $result = Db::table('words')->where('word',$word)->find();
+
+            $content = $result['back_word'];
+
+            $message = "没听懂";
+
+            if(!$result){
+                $result = Db::table('music')->where('music_name',$word)->find();
+                $content = "歌曲：".$word."\n作者：".$result['singer']."\n发行时间：".$result['time'];
+            }
+
+            if(!$result) echo backMsgText($message,$postObj->ToUserName,$postObj->FromUserName);
+		//调用方法回复信息给 用户
+            echo backMsgText($content,$postObj->ToUserName,$postObj->FromUserName);
+
+        }
+    }
+
+
+$postObj->Content为获取用户输入的文本消息
+
+
+$postObj->Recognition 为微信通过转换语音后得到的文本消息内容

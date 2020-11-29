@@ -1,0 +1,2 @@
+批量杀死进程
+kill -9 $(ps -ef|grep 进程名关键字|grep -v grep|awk '{print $2}')

@@ -1,0 +1,39 @@
+Welcome to Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Kata Containers are now fully integrated in Charmed Kubernetes 1.16!
+   Yes, charms take the Krazy out of K8s Kata Kluster Konstruction.
+
+     https://ubuntu.com/kubernetes/docs/release-notes
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+0 个可升级软件包。
+0 个安全更新。
+
+Last login: Sat Oct 12 16:57:52 2019 from 115.197.247.7
+project@project-VirtualBox:~$ su- -
+
+Command 'su-' not found, did you mean:
+
+  command 'su1' from deb hxtools
+  command 'sur' from deb subtle
+  command 'sum' from deb coreutils
+  command 'sup' from deb sup
+  command 'su' from deb login
+
+Try: sudo apt install <deb name>
+
+project@project-VirtualBox:~$ su -
+\密码： 
+➜  ~ su - git 
+git@project-VirtualBox:~$ ls
+html.git  oa.git  petition.git  python  python.git
+git@project-VirtualBox:~$ git init --bare heat_energy.git
+已初始化空的 Git 仓库于 /home/git/heat_energy.git/
+git@project-VirtualBox:~$ 

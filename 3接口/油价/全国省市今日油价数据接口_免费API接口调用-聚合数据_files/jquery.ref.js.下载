@@ -1,0 +1,38 @@
+/**
+ * 处理页面referrer
+ *
+ * @param from
+ */
+function jsQueryRef()
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    //判断校验来源，如果没有来源，就不做处理
+    var from = $('meta[name="dataId"]').attr('refFrom');
+
+    if(typeof from === 'undefined') {
+        return false;
+    }
+
+    var ref = document.referrer;
+    //排除自身的refer
+
+    var uri = location.search; //获取url中"?"符后的字串
+    var url = window.location.href;
+    var did = $('meta[name="dataId"]').attr('did');
+
+    $.post('/upload/jquery/jquery-refer.js'+uri,
+        {'refContent':ref,'from':from,'did':did},
+        function(obj){
+            console.log(obj)
+        },'json')
+
+    if(uri) {
+        var newUrl = url.replace(/s=[a-z0-9]+&?/i,'')
+        history.pushState({},$('title').html(),newUrl);
+    }
+}

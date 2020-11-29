@@ -1,0 +1,7 @@
+//资源服务器OSS(图片存放地址)
+    'oss'=>[
+        'access_key_id'=>'LTAIj8r5892LjWsm',
+        'access_key_secret'=>'Rzdq9TisLyaGwkk6FIE78plhbind4l',
+        'endpoint'=>'oss-cn-beijing.aliyuncs.com',
+        'bucket_name'=>'youxiaoheng',
+    ],

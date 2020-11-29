@@ -1,0 +1,19 @@
+$(function () {
+    $('.click-report-log').click(function(){
+        var page = $('#page-index').val();
+        if(page && !isNaN(page)) {
+            var logData = $(this).attr('log-data');
+            var mreg =/area=\d{6}/;
+
+            if(logData && mreg.test(logData)) {
+                var params = 'page='+page+'&'+logData;
+                $.ajax({
+                    url:'/empty.gif',
+                    data:params,
+                    type:'get',
+                    success:function(){}
+                })
+            }
+        }
+    })
+})

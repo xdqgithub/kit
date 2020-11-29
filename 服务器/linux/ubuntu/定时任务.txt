@@ -1,0 +1,32 @@
+查看定时任务 pgrep cron 如果运行中将返回pid
+
+编辑定时任务 crontab -e  进行编辑
+
+m h dom mon dow command
+* * * * * 软件  执行的文件 
+
+m:分钟，0-59
+h:小时，0-23
+dom:日期，1-31
+mon:月份，1-12
+dow:星期，0-6，0为星期天
+command:命令
+
+例：
+* * * * * php /path/to/your/cron.php
+5个星号分别代表定时指定每分、小时、日、月、周。
+ 
+* 19 * * * php /var/www/cron/crontab.php
+讲第二个参数h填写为19，则表示每天的下午7点执行crontab.php。
+ 
+* * * * * php /path/to/your/cron.php   
+每隔一分钟执行一次任务 
+ 
+0 * * * * php /path/to/your/cron.php     
+每小时的0点执行一次任务，比如6:00，10:00 
+ 
+6,10 * 2 * * php /path/to/your/cron.php   
+每个月2号，每小时的6分和10分执行一次任务 
+ 
+*/3,*/5 * * * * php /path/to/your/cron.php  
+每隔3分钟或5分钟执行一次任务，比如10:03，10:05，10:06

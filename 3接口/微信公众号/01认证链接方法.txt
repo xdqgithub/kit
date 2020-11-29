@@ -1,0 +1,25 @@
+
+当用户向公众好发送消息时，微信服务器向认证的url发送消息 详见微信公众平台开发文档
+
+    public function link(){
+        $request = Request::instance();
+
+        $signature = $request->param('signature');
+        $timestamp = $request->param('timestamp');
+        $nonce = $request->param('nonce');
+        $echostr = $request->param('echostr');
+        $token = "abc";
+
+        $arr = [$token,$nonce,$timestamp];
+        sort($arr,SORT_STRING);
+        $str = sha1(implode('',$arr));
+        if($str == $signature) {
+            if($echostr){
+		//认证链接 只有在微信认证路径是才会触发
+                echo $echostr;
+            }else{
+		//执行动作
+                $this->backMsg1();
+            }
+        }
+    }

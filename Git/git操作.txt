@@ -1,0 +1,57 @@
+server：
+创建Git服务器：
+	git init --brea name.git
+
+
+client：
+git config --global user.name 'runoob'
+git config --global user.email xdm.googid@gmail.com
+
+创建仓库（拉取）：
+	git clone git@github.com:schacon/simplegit.git
+
+新增本地：
+	git add filename			添加文件到缓存
+	git commit -m 'explain'		添加注释， 
+	git push origin master		origin: 主机名   master: 分支名   如果只有一个分支可以直接push， 没有分支，自动创建分支	
+
+	git commit --amend  追加到上个版本
+	
+	git fetch --all && git reset --hard origin/master && git pull   强制修改并覆盖
+
+撤销更改：
+	git reset HEAD
+
+回滚
+	git reset --hard HEAD^        	回退到上个版本
+	git reset --hard commit_id    	退到/进到 指定commit_id
+	git push origin HEAD --force 	回退的版本提交的远程
+回到新版本
+	git checkout master
+	
+操作记录
+	git reflog			打印你记录你的每一次操作记录
+
+
+查看改动详情：
+	git diff			尚未缓存的改动
+	git diff --cached 	已缓存的改动
+	git diff HEAD		查看所有改动
+	git diff --stat		显示摘要
+
+删除git仓库文件：
+	git rm <file>		删除工作目录上的文件 -f 递归删除目录
+	git rm --cached <file>	
+
+修改拉取方式
+	https->ssh ：git remote set-url origin(远程仓库名称) git@email:username/ProjectName.git
+	ssh->https :  git remote set-url origin(远程仓库名称) https://email/username/ProjectName.git
+	查看当前方式：git remote -v
+
+生成ssh key
+	ssh-keygen -t rsa -C "email or tab"
+	连续三个enter
+	复制.ssh/下的pub文件内容
+	布置到github账户内
+	点击头像->settings->ssh and GPG keys ->添加复制内容
+	

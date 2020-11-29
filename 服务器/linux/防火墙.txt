@@ -1,0 +1,20 @@
+查看防火墙 
+	iptables -L
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     tcp  --  2009061.idczone.net  anywhere             tcp dpt:mysql
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ssh
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination       
+
+开放端口
+
+	iptables -A INPUT -p tcp -s 192.168.1.10 —dport 3306 -j ACCEPT  //仅192.168.1.10 可以访问3306端口
+

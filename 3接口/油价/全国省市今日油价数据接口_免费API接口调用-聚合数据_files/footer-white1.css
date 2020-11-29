@@ -1,0 +1,205 @@
+.footer {
+  width: 100%;
+  min-width: 1200px;
+  border-top: 1px solid rgba(102, 102, 102, 0.1);
+  color: #666;
+}
+.footer-container {
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.footer-container .footer-link {
+  float: left;
+}
+.footer-container dl {
+  float: left;
+  width: 145px;
+  padding-left: 15px;
+}
+.footer-container dl dt {
+  margin-bottom: 25px;
+  font-size: 14px;
+  position: relative;
+}
+.footer-container dl dt:before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #999;
+  opacity: .5;
+  border-radius: 1px;
+  position: absolute;
+  top: 7px;
+  left: -15px;
+}
+.footer-container dl dd {
+  font-size: 12px;
+  line-height: 28px;
+  opacity: .5;
+  cursor: default;
+}
+.footer-container dl dd a {
+  color: #666;
+  cursor: pointer;
+}
+.footer-container .footer-wechat {
+  float: right;
+  text-align: right;
+}
+.footer-container .wechat-title {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+.footer-container .wechat-name {
+  font-size: 12px;
+  opacity: .5;
+}
+.footer-container .wechat-pic {
+  margin-top: 30px;
+  width: 110px;
+  height: 110px;
+  background: url(https://juheimg.oss-cn-hangzhou.aliyuncs.com/www/v6/headerFooter/wechat-white.png) center center no-repeat;
+}
+.footer-container .footer-bottom {
+  margin-top: 38px;
+  padding-left: 15px;
+  font-size: 12px;
+}
+.footer-container .footer-bottom .footer-bottom-left {
+  float: left;
+}
+.footer-container .footer-bottom .footer-bottom-right {
+  float: right;
+}
+.footer-container .footer-bottom a {
+  display: inline-block;
+  color: #666;
+}
+.footer-container .footer-bottom span {
+  vertical-align: middle;
+  opacity: .3;
+  margin-right: 3px;
+}
+.footer-container .footer-bottom .footer-pic1 {
+  display: inline-block;
+  width: 18px;
+  height: 20px;
+  background: url(https://juheimg.oss-cn-hangzhou.aliyuncs.com/www/v6/headerFooter/bei2.png) no-repeat;
+  vertical-align: middle;
+  opacity: 1;
+}
+.footer-container .footer-bottom .footer-pic2 {
+  display: inline-block;
+  width: 18px;
+  height: 20px;
+  background: url(https://juheimg.oss-cn-hangzhou.aliyuncs.com/www/v6/headerFooter/bei1.png) no-repeat;
+  vertical-align: middle;
+  opacity: 1;
+}
+.footer-container .footer-bottom .footer-license {
+  margin-left: 15px;
+}
+.footer-container .footer-bottom .footer-icp {
+  margin-left: 15px;
+}
+.footer-help {
+  position: fixed;
+  width: 180px;
+  height: 46px;
+  bottom: 30px;
+  right: 30px;
+  font-size: 16px;
+  z-index: 990;
+}
+.footer-help-btn {
+  width: 180px;
+  height: 46px;
+  line-height: 42px;
+  text-align: center;
+  background: #00bdff;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+.footer-help-btn .iconfont {
+  font-size: 24px;
+  vertical-align: middle;
+}
+.footer-help-btn span {
+  vertical-align: middle;
+}
+.footer-help-btn .dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+}
+.footer-help-top {
+  display: none;
+  position: absolute;
+  left: -66px;
+  top: 0;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  background: rgba(108, 108, 108, 0.3);
+  background: rgb(108, 108, 108)\9;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.footer-help-top .iconfont{
+  display: none\9;
+}
+.footer-help-top span {
+  font-size: 14px;
+}
+.footer-help-container {
+  display: none;
+  position: absolute;
+  bottom: 46px;
+  left: -10px;
+  width: 197px;
+  height: 280px;
+  background: url(https://juheimg.oss-cn-hangzhou.aliyuncs.com/www/v6/headerFooter/help-container.png) no-repeat;
+}
+.footer-help-container .help-list {
+  padding: 25px 0 0 30px;
+}
+.footer-help-container .help-list li {
+  height: 40px;
+  margin-bottom: 20px;
+}
+.footer-help-container .help-list a {
+  color: #666;
+  display: block;
+}
+.footer-help-container .help-list .help-icon {
+  float: left;
+}
+.footer-help-container .help-list .help-icon .iconfont {
+  font-size: 22px;
+}
+.footer-help-container .help-list .help-text {
+  float: left;
+  margin-left: 10px;
+}
+.footer-help-container .help-list .help-title {
+  font-weight: bold;
+}
+.footer-help-container .help-list .help-phone {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #00bdff;
+}
+.footer-help-container .help-list .help-desc {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #bbb;
+}

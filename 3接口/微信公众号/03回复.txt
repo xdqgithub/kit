@@ -1,0 +1,57 @@
+//文本回复
+function backMsgText($content='',$FromUserName='公众号名',$ToUserName="用户名"){
+    if('' != $content){
+        $xml = "
+            <xml>
+                <ToUserName><![CDATA[{$ToUserName}]]></ToUserName>	//给谁传递消息
+                <FromUserName><![CDATA[{$FromUserName}]]></FromUserName>//消息来自谁
+                <CreateTime>{time()}</CreateTime>			//时间戳
+                <MsgType><![CDATA[text]]></MsgType>			//回复的类型
+                <Content><![CDATA[{$content}]]></Content>		//回复的内容
+             </xml>";		
+        return  $xml;							//函数返回xml文本
+    }	
+}
+//图文回复
+function backMsgPic($game_name='',$url='',$description='',$picture='',$FromUserName='gh_a1e8db111675',$ToUserName="oFW241L9JHsII9NXwZR9IMKa0C64"){
+    if($url && $game_name){
+        $xml = "
+        <xml>
+          <ToUserName><![CDATA[$ToUserName]]></ToUserName>
+          <FromUserName><![CDATA[$FromUserName]]></FromUserName>
+          <CreateTime>{time()}</CreateTime>
+          <MsgType><![CDATA[news]]></MsgType>
+          <ArticleCount>1</ArticleCount>
+          <Articles>
+            <item>
+              <Title><![CDATA[{$game_name}]]></Title>
+              <Description><![CDATA[{$description}]]></Description>
+              <PicUrl><![CDATA[{$picture}]]></PicUrl>
+              <Url><![CDATA[{$url}]]></Url>
+            </item>
+          </Articles>
+        </xml>
+        ";
+        return $xml;
+    }
+}
+//音乐回复
+function backMsgMusic($music='',$url='',$burl='',$description='',$FromUserName='gh_a1e8db111675',$ToUserName="oFW241L9JHsII9NXwZR9IMKa0C64"){
+    if('' != $music && $url != '' && $burl!= ''){
+        $xml = "
+        <xml>
+           <ToUserName><![CDATA[$ToUserName]]></ToUserName>
+          <FromUserName><![CDATA[$FromUserName]]></FromUserName>
+          <CreateTime>{time()}</CreateTime>
+          <MsgType><![CDATA[music]]></MsgType>
+          <Music>
+            <Title><![CDATA[$music]]></Title>
+            <Description><![CDATA[$description]]></Description>
+            <MusicUrl><![CDATA[$url]]></MusicUrl>
+            <HQMusicUrl><![CDATA[$burl]]></HQMusicUrl>
+          </Music>
+        </xml>
+        ";
+        return $xml;
+    }
+}

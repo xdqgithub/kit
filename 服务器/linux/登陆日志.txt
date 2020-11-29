@@ -1,0 +1,10 @@
+删除登陆日志 
+
+# > /var/log/wtmp
+# > /var/log/btmp
+# > /var/log/lastlog
+
+
+参考：https://blog.csdn.net/counsellor/article/details/87082207
+
+rm -rf  /var/log/wtmp  /var/log/btmp /var/log/lastlog

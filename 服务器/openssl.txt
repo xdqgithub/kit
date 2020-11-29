@@ -1,0 +1,14 @@
+生成服务器 密钥对： 
+	参考地址：https://sg.godaddy.com/zh/help/nginx-csr-3601
+	密钥：openssl req -new -newkey rsa:2048 -nodes -keyout 您的域名.key -out 您的域名.csr
+
+
+使用方式参考：
+	https://sg.godaddy.com/zh/help/centos-7-nginx-27192
+
+
+通过如下openssl自带的工具检测私钥与证书是否匹配
+	证书
+	openssl x509 -noout -modulus -in ssl.crt/ca_****.crt | openssl md5
+	私钥
+	openssl rsa -noout -modulus -in ssl.key/****.com.20160503.key | openssl md5

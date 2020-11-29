@@ -1,0 +1,110 @@
+window.registerIntro = true;
+window.lock = true;
+
+function again() {
+    window.lock = true;
+    setTimeout(function () {
+        if (window.lock && window.registerIntro) {
+            layer.closeAll();
+            layer.open({
+                type: 2,
+                shadeClose: true,
+                title: false,
+                closeBtn: false,
+                shade: 0.3,
+                border: [1, 0.5, '#ccc'],
+                area: ['350px', '417px'],
+                content: '/register/registerPop',
+                success: function () {
+                    window.lock = false;
+                },
+                end: function () {
+                    window.registerIntro && again();
+                }
+            });
+        }
+    }, 120000);
+}
+if (!window.getCookie('hasReg')) {
+    setTimeout(function () {
+        if (window.lock && window.registerIntro) {
+            layer.closeAll();
+            layer.open({
+                type: 2,
+                shadeClose: true,
+                title: false,
+                closeBtn: false,
+                shade: 0.3,
+                border: [1, 0.5, '#ccc'],
+                area: ['350px', '417px'],
+                content: '/register/registerPop',
+                success: function () {
+                    window.lock = false;
+                },
+                end: function () {
+                    window.registerIntro && again();
+                }
+            });
+        }
+
+    }, 10000);
+}
+/**
+ * 获取cookie
+ *
+ * @param c_name
+ * @returns {string}
+ */
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=")
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1
+            c_end = document.cookie.indexOf(";", c_start)
+            if (c_end == -1) c_end = document.cookie.length
+            return unescape(document.cookie.substring(c_start, c_end))
+        }
+    }
+    return ""
+}
+
+/**
+ * 弹窗注册，成功回调
+ *
+ */
+function popRegCallBack() {
+//        layer.closeAll();
+    window.location.href = '/register/regSuccess';
+}
+
+/**
+ * 弹窗登录
+ */
+function frameLogin() {
+    window.registerIntro = false;
+    layer.closeAll()
+    layer.open({
+        type: 2,
+        shadeClose: false,
+        title: false,
+        closeBtn: 0,
+        shade: 0.3,
+        border: [1, 0.5, '#ccc'],
+        area: ['400px', '465px'],
+        content: '/login/mini'
+    })
+}
+
+/**
+ * 弹窗登录回调
+ * @param obj
+ */
+function loginBack(obj) {
+    var url = $(".now-btn").attr("data");
+    layer.closeAll();
+    if(url){
+        window.location.href=url;
+    }else{
+        window.location.reload();
+    }
+}

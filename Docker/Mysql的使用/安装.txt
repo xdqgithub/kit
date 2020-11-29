@@ -1,0 +1,32 @@
+1.搜索Mysql镜像：docker search mysql
+2.查看带有server字样的镜像
+3.拉取镜像 docker pull mysql-server
+4.实例化容器：docker run --name mysqlserver -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql/mysql-server
+	1）run 实例化命令
+	2）--name 容器取名 mysqlserver 取得名称
+	3）-p 容器端口映射  将容器的3306端口映射到物理机3306端口上
+	4）-e 传递全局变量 
+		key	:	MYSQL_ROOT_PASSWORD 	变量名称(mysql root用户初始密码)
+		value	:	123456 			变量值  
+	5）-d 后台运行
+	6）mysql/mysql-server  创建容器所使用的镜像
+	
+5.进入容器：docker exec -it mysqlserver /bin/bash
+	1) exec 在运行的容器中执行命令
+	2）	-i 在容器内指定一个伪终端或终端
+		-t 允许对容器内的标砖输入(STDIN)进行交互
+	3)容器名称 mysqlserver
+	4)已 /bin/bash 终端方式交互
+6.登录mysql
+	mysql -u root -p
+	输入密码 输入密码不显示
+
+7.使用外网连接测试
+	如提示：authentication plugin caching_sha2_password cannot be loaded:
+	进行三部修改
+		1）ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;   #修改加密规则 
+		2）ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';   #更新一下用户的密码 
+		3）FLUSH PRIVILEGES;   #刷新权限 
+杂项：
+	mysql 数据表文件夹 /var/lib/mysql
+	docker run --name mysqlserver -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d \ -v /home/mysql:/var/lib/mysql:ro \ mysql/mysql-server

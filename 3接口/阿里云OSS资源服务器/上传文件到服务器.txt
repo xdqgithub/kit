@@ -1,0 +1,51 @@
+
+    /**
+     * 第三方资源服务器上传文件
+     * @param $item 上传表单名
+     * @param $oss oss配置
+     * @param $config 上传文件限制
+     */
+    public function upload($item, $plugin, $config = []){
+        //判断是否上传文件
+        if(!isset($_FILES[$item])){
+            throw new BaseException(['msg'=>'没有上传文件']);
+        }
+
+        //判断是否超过php.ini
+        if(!isset($_FILES[$item]['error']) && $_FILES[$item]['error']==1) {
+            throw new BaseException(['msg' => '上传文件超过php上传文件大小限制']);
+        }
+        //获取文件后缀名
+        $exp_name= substr($_FILES[$item]['name'],strpos($_FILES[$item]['name'],'.'));
+        //生成文件名
+        $file_name = date('Ymd').'-'.md5(time()).$exp_name;
+        //获取文件路径
+        $file_path = $_FILES[$item]['tmp_name'];
+        try {
+            //引入类文件
+            import('OssClient',VENDOR_PATH.'aliyuncs'.DS.'oss-sdk-php'.DS.'src'.DS,'php');
+            //初始化
+            $ossClient = new OssClient($plugin['access_key_id'], $plugin['access_key_secret'],$plugin['endpoint']);
+        } catch (\Exception $e) {
+            //记录失败日志
+            write_log("OSS实例化失败:" . json_encode($e->getMessage()),config('oss_error_log'));
+            //抛出异常
+            throw new BaseException(['msg'=>'上传失败1']);
+        }
+        try {
+            //上传文件
+            $ossClient->uploadFile($plugin['bucket_name'], $file_name, $file_path);
+            //返回文件路径
+            return "http://".$plugin['bucket_name'].'.'.$plugin['endpoint'].'/'. $file_name;
+        } catch (\Exception $e) {
+            //记录失败日志
+            write_log("OSS上传失败:" . json_encode($e->getMessage()),config('oss_error_log'));
+            throw new BaseException(['msg'=>'上传失败2']);
+        }
+    }
+
+
+
+
+
+inpoint()函数为助手函数   参数1 类名 参数2 起始路径 参数3 文件后缀名
