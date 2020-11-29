@@ -1,0 +1,5 @@
+insert into 表名 select
+id,
+md5(random()::text),
+clock_timestamp() + (id||'second ')::interval --递增时间
+from generate_series(1,3000000) t(id); 

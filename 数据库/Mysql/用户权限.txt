@@ -1,0 +1,2 @@
+GRANT ALL ON db.table(或*.*) TO username@192.168.1.% IDENTIFIED BY “password”
+ flush privileges;

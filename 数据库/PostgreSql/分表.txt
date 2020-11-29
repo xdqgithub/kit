@@ -1,0 +1,51 @@
+create table hcep_heat_exchange_danfoss_2019_10(check (created_at >= '2019-10-01' and created_at < '2019-11-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2019_11(check (created_at >= '2019-11-01' and created_at < '2019-12-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2019_12(check (created_at >= '2019-12-01' and created_at < '2020-01-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_01(check (created_at >= '2020-01-01' and created_at < '2020-02-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_02(check (created_at >= '2020-02-01' and created_at < '2020-03-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_03(check (created_at >= '2020-03-01' and created_at < '2020-04-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_04(check (created_at >= '2020-04-01' and created_at < '2020-05-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_05(check (created_at >= '2020-05-01' and created_at < '2020-06-01')) inherits(hcep_heat_exchange_danfoss);
+create table hcep_heat_exchange_danfoss_2020_06(check (created_at >= '2020-06-01' and created_at < '2020-07-01')) inherits(hcep_heat_exchange_danfoss);
+
+
+
+
+--添加触发器
+create or replace function hcep_heat_exchange_danfoss_insert_trigger()
+    returns trigger
+    as	$$
+declare
+  created_at varchar := NEW.created_at;
+begin
+  if NEW.created_at >=	'2019-10-01' and NEW.created_at<'2019-11-01' then
+	insert into hcep_heat_exchange_danfoss_2019_10 values (NEW.*);
+  elsif NEW.created_at >='2019-11-01' and NEW.created_at<'2019-12-01' then
+	insert into hcep_heat_exchange_danfoss_2019_11 values (NEW.*);
+  elsif NEW.created_at >='2019-12-01' and NEW.created_at<'2020-01-01' then
+	insert into hcep_heat_exchange_danfoss_2019_12 values (NEW.*);
+  elsif NEW.created_at >='2020-01-01' and NEW.created_at<'2020-02-01' then
+	insert into hcep_heat_exchange_danfoss_2020_01 values (NEW.*);	
+	elsif NEW.created_at >='2020-02-01' and NEW.created_at<'2020-03-01' then
+	insert into hcep_heat_exchange_danfoss_2020_02 values (NEW.*);	
+	elsif NEW.created_at >='2020-03-01' and NEW.created_at<'2020-04-01' then
+	insert into hcep_heat_exchange_danfoss_2020_03 values (NEW.*);	
+	elsif NEW.created_at >='2020-04-01' and NEW.created_at<'2020-05-01' then
+	insert into hcep_heat_exchange_danfoss_2020_04 values (NEW.*);	
+	elsif NEW.created_at >='2020-05-01' and NEW.created_at<'2020-06-01' then
+	insert into hcep_heat_exchange_danfoss_2020_05 values (NEW.*);	
+	elsif NEW.created_at >='2020-06-01' and NEW.created_at<'2020-07-01' then
+	insert into hcep_heat_exchange_danfoss_2020_06 values (NEW.*);	
+	else
+    raise exception 'id: % created_at out of date_scope', NEW.id;
+  end if;
+  return null;
+end;
+$$ language plpgsql;
+
+
+
+
+--触发器绑定表
+create trigger insert_hcep_heat_exchange_danfoss_parttion_trigger before insert on hcep_heat_exchange_danfoss for each row execute procedure hcep_heat_exchange_danfoss_insert_trigger(); 
+

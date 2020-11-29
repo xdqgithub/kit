@@ -1,0 +1,43 @@
+
+
+int
+1.占用4个字节
+2.建立索引之后，查询速度快
+3.条件范围搜索可以使用使用between
+4.可以使用form_unixtime进行格式化
+5.有范围限制
+a.select from_unixtime(0) = 1970-01-01 08:00:00
+b.select from_unixtime(2147483647) = 2038-01-19 11:14:07
+c.select from_unixtime(2147483648) = NULL
+
+结论：适合需要进行大量时间范围查询的数据表
+
+datetime
+1.占用8个字节
+2.允许为空值，可以自定义值，系统不会自动修改其值
+3.实际格式储存（Just stores what you have stored and retrieves the same thing which you have stored.）
+4.与时区无关（It has nothing to deal with the TIMEZONE and Conversion.）
+5.不可以设定默认值，所以在不允许为空值的情况下，必须手动指定datetime字段的值才可以成功插入数据
+6.可以在指定datetime字段的值的时候使用now()变量来自动插入系统的当前时间
+7.范围：1000-01-01 00:00:00'到'9999-12-31 23:59:59'
+
+结论：datetime类型适合用来记录数据的原始的创建时间，因为无论你怎么更改记录中其他字段的值，datetime字段的值都不会改变，除非你手动更改它
+
+timestamp
+1.占用4个字节
+2.允许为空值，但是不可以自定义值，所以为空值时没有任何意义
+3.TIMESTAMP也有范围限制，同int
+4.值以UTC格式保存（ it stores the number of milliseconds）
+5.时区转化 ，存储时对当前的时区进行转换，检索时再转换回当前的时区
+6.默认值为CURRENT_TIMESTAMP()，其实也就是当前的系统时间
+7.数据库会自动修改其值，所以在插入记录时不需要指定timestamp字段的名称和timestamp字段的值，你只需要在设计表的时候添加一个timestamp字段即可，插入后该字段的值会自动变为当前系统时间
+8.以后任何时间修改表中的记录时，对应记录的timestamp值会自动被更新为当前的系统时间
+
+结论：timestamp类型适合用来记录数据的最后修改时间，因为只要你更改了记录中其他字段的值，timestamp字段的值都会被自动更新。
+
+--------------------------------------------
+int效率最高，索引等优化也简单，缺点是不直观；
+TIMESTAMP占用小，但是显示范围小，1970----037，并且和时区挂钩；
+datetime占用大，范围也大，和时区不挂钩。
+
+我个人是倾向于int类型的，无论是索引，排序，存储都很方便，出来的时候根据当地时区转换即可。

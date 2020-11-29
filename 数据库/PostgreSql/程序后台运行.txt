@@ -1,0 +1,1 @@
+nohup php index.php 127.0.0.1 11710 collector hcep_device_info_100_copy 10000 hcep_device_info_100 &

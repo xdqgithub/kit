@@ -1,0 +1,8 @@
+1。 连接密码加密方式修改问题
+	参考地址：https://www.cnblogs.com/zhurong/p/9898675.html
+	显示 ：authentication plugin caching_sha2_password cannot be loaded:
+		ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;   #修改加密规则 
+		ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';   #更新一下用户的密码 
+		FLUSH PRIVILEGES;   #刷新权限 
+		PS：单独重置密码命令：alter user 'root'@'localhost' identified by '111111';
+	

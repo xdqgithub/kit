@@ -1,0 +1,20 @@
+ 
+--创建索引
+CREATE SEQUENCE  索引名  start with 主键开始值  increment by 主键增长值  
+no minvalue no maxvalue cache 1;
+
+--关联表字段
+
+alter table 表名 alter column 字段 set default nextval('索引名');
+
+
+
+CREATE SEQUENCE 
+table_name_id_seq			//建立索引名	
+START WITH 1				//主键开始值
+INCREMENT BY 1				//递增值
+NO MINVALUE				//最小值	
+NO MAXVALUE				//最大值
+CACHE 1;					
+
+alter table table_name alter column id set default nextval('table_name_id_seq');

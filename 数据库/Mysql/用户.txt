@@ -1,0 +1,13 @@
+
+给 root用户添加 局域网 操作db(数据库名) 中table（表名）表的权限 通过密码 213456
+GRANT ALL ON db.table(或*.*) TO root@192.168.1.% IDENTIFIED BY “123456”
+
+修改用户权限后 要刷新权限 如下
+flush privileges;
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.104.50' IDENTIFIED BY '123123' WITH GRANT OPTION;
+
+允许 用户 root 通过ip 192.168.104.50 进行访问本服务器 密码是 123123
+
+FLUSH   PRIVILEGES;

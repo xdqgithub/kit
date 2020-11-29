@@ -1,0 +1,6 @@
+备份
+pg_dump -U postgres -d management -f "d:\management.sql"
+还原
+psql -h 47.93.191.9 -p 5432 -U postgres -d management -f "d:\management.sql"
+
+-h 主机ip地址 -p 端口号 -U 用户名 -d 数据库  -f 本地文件地址
